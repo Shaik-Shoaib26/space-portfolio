@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dua Cards</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #010813;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .dua-card {
+            background-color: #83cfc2;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(220, 240, 6, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dua-card:hover {
+            box-shadow: 0 6px 12px rgba(17, 128, 7, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #221759;
+            margin-bottom: 15px;
+        }
+
+        .dua-text {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .dua-card button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #00796b;
+            color: rgb(8, 73, 110);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none; /* Hide button */
+        }
+
+        .dua-card button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+    <div class="dua-card" onclick="location.href='duafiles/protection.html';">
+        <div class="card-title">Dua for Protection</div> 
+        <div class="dua-text">
+            اللّهُـمَّ إِنّي أَسْأَلُكَ السَّلاَمَةَ فِي الدّينِ وَالدُّنْيَا وَالآخِرَةِ
+            <br><br>
+            "O Allah, I ask You for peace in my faith, my world, and in the hereafter."
+        </div>
+    </div>
+
+    <div class="dua-card">
+        <div class="card-title">Dua for Forgiveness</div>
+        <div class="dua-text">
+            رَبِّ اغْفِرْ لِي وَارْحَمْنِي وَجْبُرْنِي وَفِرْ لِي ذَنْبِي
+            <br><br>
+            "My Lord, forgive me, have mercy on me, heal me, and forgive my sins."
+        </div>
+    </div>
+
+    <div class="dua-card">
+        <div class="card-title">Dua for Success</div>
+        <div class="dua-text">
+            رَبِّ يَسِّرْ وَلا تُعَسِّرْ وَتَمِّمْ بِالْخَيْرِ
+            <br><br>
+            "My Lord, make things easy and do not make them difficult, and complete them with good."
+        </div>
+    </div>
+
+    <div class="dua-card">
+        <div class="card-title">Dua for Relief</div>
+        <div class="dua-text">
+            لا إله إلا أنتَ سبحانك إني كنت من الظالمين
+            <br><br>
+            "There is no god but You, glorified are You, indeed I have been among the wrongdoers."
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Calendar</title>
+  <style>
+    /* General Body Styling */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background: radial-gradient(circle, #0b3b66, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Calendar Container */
+    .calendar {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .calendar h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #ffdd00, 0 0 20px #ffaa00;
+    }
+
+    .calendar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .date-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .date-container div {
+      font-size: 1.2rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <h1>Islamic Calendar</h1>
+    <h2>Today’s Date</h2>
+    <div class="date-container">
+      <div id="gregorian-date">Gregorian Date: </div>
+      <div id="hijri-date">Hijri Date: </div>
+    </div>
+    <div class="footer">Calculated Locally</div>
+  </div>
+
+  <script>
+    // Function to calculate the Hijri date
+    function calculateHijriDate() {
+      const today = new Date();
+      
+      // Julian Day Number calculation for today's date
+      const gregorianYear = today.getFullYear();
+      const gregorianMonth = today.getMonth() + 1; // Months are 0-indexed
+      const gregorianDay = today.getDate();
+
+      const julianDay =
+        Math.floor((1461 * (gregorianYear + 4800 + Math.floor((gregorianMonth - 14) / 12))) / 4) +
+        Math.floor((367 * (gregorianMonth - 2 - 12 * Math.floor((gregorianMonth - 14) / 12))) / 12) -
+        Math.floor((3 * Math.floor((gregorianYear + 4900 + Math.floor((gregorianMonth - 14) / 12)) / 100)) / 4) +
+        gregorianDay - 32075;
+
+      // Convert Julian Day to Islamic date
+      const islamicEpoch = 1948439.5; // Julian Day of 1 Muharram, AH 1
+      const daysSinceEpoch = julianDay - islamicEpoch;
+      const islamicYear = Math.floor((30 * daysSinceEpoch + 10646) / 10631);
+      const islamicMonth = Math.min(
+        12,
+        Math.ceil((daysSinceEpoch - (29 + hijriMonthStart(islamicYear))) / 29.5) + 1
+      );
+      const islamicDay = daysSinceEpoch - hijriMonthStart(islamicYear, islamicMonth) + 1;
+
+      return { year: islamicYear, month: islamicMonth, day: islamicDay };
+    }
+
+    function hijriMonthStart(year, month = 1) {
+      return Math.floor(29.5001 * (month - 1)) + Math.floor((year - 1) * 354.366) + 1;
+    }
+
+    // Format Hijri Date
+    function formatHijriDate(hijriDate) {
+      const hijriMonths = [
+        "Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani",
+        "Jumada al-Awwal", "Jumada al-Thani", "Rajab", "Sha'ban",
+        "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
+      ];
+      return `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year} AH`;
+    }
+
+    // Display Today's Gregorian Date
+    const today = new Date();
+    const gregorianDate = today.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    document.getElementById('gregorian-date').innerText = `Gregorian Date: ${gregorianDate}`;
+
+    // Display Today's Hijri Date
+    const hijriDate = calculateHijriDate();
+    document.getElementById('hijri-date').innerText = `Hijri Date: ${formatHijriDate(hijriDate)}`;
+  </script>
+</body>
+</html>
